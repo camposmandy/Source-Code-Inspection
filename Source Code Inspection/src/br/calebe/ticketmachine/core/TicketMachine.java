@@ -24,12 +24,12 @@ public class TicketMachine {
         for (int i = 0; i < papelMoeda.length && !achou; i++) {
             if (papelMoeda[i] == quantia) {
                 achou = true;
+                this.saldo += quantia;
             }
         }
         if (!achou) {
             throw new PapelMoedaInvalidaException();
         }
-        this.saldo += quantia;
     }
 
     public int getSaldo() {
@@ -44,6 +44,8 @@ public class TicketMachine {
         if (saldo < valor) {
             throw new SaldoInsuficienteException();
         }
+        saldo = saldo - valor;
+        
         String result = "*****************\n";
         result += "*** R$ " + saldo + ",00 ****\n";
         result += "*****************\n";
